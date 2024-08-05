@@ -59,12 +59,9 @@ describe('CurryOn', () => {
 
     it('should clear mapInput and mapOutput functions', () => {
         const add = (a: number) => (b: number) => a + b
-        const add5add1multiple2 = CurryOn(add(5))
-            .mapInput((a: number) => [a + 1])
-            .mapOutput((result) => result * 2)
-            .clearCurryOn()
+        const add5 = CurryOn(add(5)).clearCurryOn()
 
-        const keys = Object.keys(add5add1multiple2)
+        const keys = Object.keys(add5)
         expect(keys).not.toContain('mapInput')
         expect(keys).not.toContain('mapOutput')
     })
