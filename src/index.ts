@@ -1,11 +1,22 @@
-export type BaseFunc<Params extends any[], Result> = (
-    ...params: Params
-) => Result
+type BaseFunc<Params extends any[], Result> = (...params: Params) => Result
+
+export type CurryOnInstance<OgParams extends any[], OgResult> = {
+    (...params: OgParams): OgResult
+    mapOutput: <NewResult>(
+        cb: (result: OgResult) => NewResult
+    ) => CurryOnInstance<OgParams, NewResult>
+    mapInput: <NewParams extends any[]>(
+        cb: (...params: NewParams) => OgParams
+    ) => CurryOnInstance<NewParams, OgResult>
+    clearCurryOn: () => BaseFunc<OgParams, OgResult>
+}
 
 export const CurryOn = <OgParams extends any[], OgResult>(
     rootFunc: BaseFunc<OgParams, OgResult>
 ) => {
-    const instance = (...params: OgParams) => rootFunc(...params)
+    const instance: CurryOnInstance<OgParams, OgResult> = (
+        ...params: OgParams
+    ) => rootFunc(...params)
 
     instance.mapOutput = <NewResult>(
         mapOutputCb: BaseFunc<[OgResult], NewResult>
