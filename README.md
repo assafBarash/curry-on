@@ -50,13 +50,13 @@ const result = addAndFormat(2) // Output: "The result is: 6"
 ## API
 all methods returns an instance of `CurryOn` invokable as `rootFunction`
 
-#### CurryOn(rootFunc)
+### CurryOn(rootFunc)
 Enhances the given function with mapOutput and mapInput methods.
 
-##### Parameters:
+Parameters:
 - rootFunc: The function to be enhanced.
 
-#### instance.mapOutput(processOutputCb)
+### instance.mapOutput(processOutputCb)
 Maps the output of the enhanced function to a new result type using the provided callback.
 
 Parameters:
@@ -65,7 +65,7 @@ Parameters:
 Returns:
 - A new CurryOn instance with the output mapping applied.
 
-#### instance.mapInput(processInputCb)
+### instance.mapInput(processInputCb)
 Maps the input parameters of the enhanced function using the provided callback.
 
 Parameters:
