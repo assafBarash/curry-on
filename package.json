@@ -1,7 +1,7 @@
 {
   "name": "curry-on",
   "version": "0.0.1-6",
-  "main": "dist/index.js",
+  "main": "dist/index.min.js",
   "files": [
     "dist",
     "README.md"
