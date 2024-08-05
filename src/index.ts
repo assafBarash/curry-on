@@ -8,18 +8,18 @@ export const CurryOn = <OgParams extends any[], OgResult>(
     const instance = (...params: OgParams) => rootFunc(...params)
 
     instance.mapOutput = <NewResult>(
-        processOutputCb: BaseFunc<[OgResult], NewResult>
+        mapOutputCb: BaseFunc<[OgResult], NewResult>
     ) =>
         CurryOn<OgParams, NewResult>((...params) => {
             const result = rootFunc(...params)
-            return processOutputCb(result)
+            return mapOutputCb(result)
         })
 
     instance.mapInput = <NewParams extends any[]>(
-        processInputCb: BaseFunc<NewParams, OgParams>
+        mapInputCb: BaseFunc<NewParams, OgParams>
     ) =>
         CurryOn<NewParams, OgResult>((...params) => {
-            const newParams = processInputCb(...params)
+            const newParams = mapInputCb(...params)
             return rootFunc(...newParams)
         })
 
