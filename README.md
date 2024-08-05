@@ -18,7 +18,7 @@ import { CurryOn } from 'curry-on'
 // Define a curried function
 const curryAdd = (a: number) => (b: number) => a + b
 
-// Create a CurryOn instance
+// load curried function
 const add4 = curryAdd(4)
 
 // Enhance the function with CurryOn
@@ -37,7 +37,7 @@ import { CurryOn } from 'curry-on'
 // Define a curried function
 const curryAdd = (a: number) => (b: number) => a + b
 
-// Create a CurryOn instance
+// load curried function
 const add4 = curryAdd(4)
 
 // Enhance the function with CurryOn and mutate the return type
