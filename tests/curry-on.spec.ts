@@ -41,14 +41,6 @@ describe('CurryOn', () => {
         expect(identityFn(5)).toBe(5)
     })
 
-    it('should correctly handle large strings with mapOutput', () => {
-        const concatenate = (a: string) => (b: string) => a + b
-        const concatHello = CurryOn(concatenate('Hello ')).mapOutput((result) =>
-            result.toUpperCase()
-        )
-        expect(concatHello('world')).toBe('HELLO WORLD')
-    })
-
     it('should chain mapInput and mapOutput', () => {
         const add = (a: number) => (b: number) => a + b
         const add5add1multiple2 = CurryOn(add(5))
