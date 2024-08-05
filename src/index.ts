@@ -23,5 +23,7 @@ export const CurryOn = <OgParams extends any[], OgResult>(
             return rootFunc(...newParams)
         })
 
+    instance.clearCurryOn = () => rootFunc
+
     return instance
 }
