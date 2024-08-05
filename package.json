@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "tsc && terser dist/index.js --compress --mangle --output dist/index.min.js",
+    "postbuild": "npx rimraf dist/index.js",
     "dev": "node dist/main.js"
   },
   "keywords": [],
