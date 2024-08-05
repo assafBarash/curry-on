@@ -1,4 +1,6 @@
-type BaseFunc<Params extends any[], Result> = (...params: Params) => Result
+export type BaseFunc<Params extends any[], Result> = (
+    ...params: Params
+) => Result
 
 export const CurryOn = <OgParams extends any[], OgResult>(
     rootFunc: BaseFunc<OgParams, OgResult>
