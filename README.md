@@ -56,20 +56,20 @@ Enhances the given function with mapOutput and mapInput methods.
 Parameters:
 - rootFunc: The function to be enhanced.
 
-### instance.mapOutput(processOutputCb)
+### instance.mapOutput(mapOutputCb)
 Maps the output of the enhanced function to a new result type using the provided callback.
 
 Parameters:
-- processOutputCb: A function that processes the result of the enhanced function.
+- mapOutputCb: A function that map the result of the enhanced function.
 
 Returns:
 - A new CurryOn instance with the output mapping applied.
 
-### instance.mapInput(processInputCb)
+### instance.mapInput(mapInputCb)
 Maps the input parameters of the enhanced function using the provided callback.
 
 Parameters:
-- processInputCb: A function that processes the input parameters of the enhanced function.
+- mapInputCb: A function that map the input parameters of the enhanced function.
 
 Returns:
 - A new CurryOn instance with the input mapping applied.
