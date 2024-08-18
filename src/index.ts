@@ -1,5 +1,4 @@
 type BaseFunc<Params extends any[], Result> = (...params: Params) => Result
-type MaybePromise<T> = T | Promise<T>
 
 export type CurryOnInstance<OgParams extends any[], OgResult> = {
     (...params: OgParams): OgResult
