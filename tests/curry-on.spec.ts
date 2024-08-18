@@ -55,4 +55,11 @@ describe('CurryOn', () => {
         expect(keys).not.toContain('mapInput')
         expect(keys).not.toContain('mapOutput')
     })
+
+    it('should support async functions', async () => {
+        const asyncAdd = async (a: number) => a + 5
+        const asyncAdd5 = CurryOn(asyncAdd)
+        const result = await asyncAdd5(10)
+        expect(result).toBe(15)
+    })
 })
