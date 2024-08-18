@@ -6,7 +6,7 @@ export type CurryOnInstance<OgParams extends any[], OgResult> = {
         cb: (result: OgResult) => NewResult
     ) => CurryOnInstance<OgParams, NewResult>
     mapOutputAsync: <NewResult>(
-        cb: (result: Awaited<OgResult>) => Promise<NewResult>
+        cb: (result: Awaited<OgResult>) => Promise<NewResult> | NewResult
     ) => CurryOnInstance<OgParams, Promise<NewResult>>
     mapInput: <NewParams extends any[]>(
         cb: (...params: NewParams) => OgParams
