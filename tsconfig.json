@@ -4,7 +4,9 @@
     "module": "CommonJS",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
     "declaration": true,
     "moduleResolution": "Node",
@@ -15,6 +17,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*", "tests/**/*.ts"],
-  "exclude": ["node_modules", "src/main.ts"]
+  "include": [
+    "src/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+    "tests/**/*.ts"
+  ]
 }
