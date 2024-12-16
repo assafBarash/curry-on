@@ -3,10 +3,13 @@ type MaybePromise<T> = T | Promise<T>
 export type CurryOnInstance<OgParams extends any[], OgResult> = {
     (...params: OgParams): OgResult
     mapOutput: <NewResult>(
-        cb: (result: OgResult) => NewResult
+        cb: (result: OgResult, input: OgParams) => NewResult
     ) => CurryOnInstance<OgParams, NewResult>
     mapOutputAsync: <NewResult>(
-        cb: (result: Awaited<OgResult>) => MaybePromise<NewResult>
+        cb: (
+            result: Awaited<OgResult>,
+            input: OgParams
+        ) => MaybePromise<NewResult>
     ) => CurryOnInstance<OgParams, Promise<NewResult>>
     mapInput: <NewParams extends any[]>(
         cb: (...params: NewParams) => OgParams
@@ -22,11 +25,11 @@ export const CurryOn = <OgParams extends any[], OgResult>(
     ) => rootFunc(...params)
 
     instance.mapOutput = <NewResult>(
-        mapOutputCb: BaseFunc<[OgResult], NewResult>
+        mapOutputCb: BaseFunc<[OgResult, OgParams], NewResult>
     ) =>
         CurryOn<OgParams, NewResult>((...params) => {
             const result = rootFunc(...params)
-            return mapOutputCb(result)
+            return mapOutputCb(result, params)
         })
 
     instance.mapInput = <NewParams extends any[]>(
@@ -38,11 +41,14 @@ export const CurryOn = <OgParams extends any[], OgResult>(
         })
 
     instance.mapOutputAsync = <NewResult>(
-        mapOutputCb: BaseFunc<[Awaited<OgResult>], MaybePromise<NewResult>>
+        mapOutputCb: BaseFunc<
+            [Awaited<OgResult>, OgParams],
+            MaybePromise<NewResult>
+        >
     ) =>
         CurryOn<OgParams, Promise<NewResult>>(async (...params) => {
             const result = await rootFunc(...params)
-            return mapOutputCb(result)
+            return mapOutputCb(result, params)
         })
 
     instance.clearCurryOn = () => rootFunc

@@ -62,4 +62,11 @@ describe('CurryOn', () => {
         const result = await asyncAdd5(10)
         expect(result).toBe(15)
     })
+
+    it('should have access to input on mapOut methods', () => {
+        const add5 = CurryOn(add(5)).mapOutput(
+            (result, [input]) => result + input
+        )
+        expect(add5(10)).toBe(25)
+    })
 })
