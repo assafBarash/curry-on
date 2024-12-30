@@ -37,7 +37,11 @@ export const CurryOn = <OgParams extends any[], OgResult>(
     ) =>
         CurryOn<NewParams, OgResult>((...params) => {
             const newParams = mapInputCb(...params)
-            return rootFunc(...newParams)
+            return rootFunc(
+                ...((Array.isArray(newParams)
+                    ? newParams
+                    : [newParams]) as OgParams)
+            )
         })
 
     instance.mapOutputAsync = <NewResult>(
