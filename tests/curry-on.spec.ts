@@ -58,9 +58,18 @@ describe('CurryOn', () => {
 
     it('should support async functions', async () => {
         const asyncAdd = async (a: number) => a + 5
-        const asyncAdd5 = CurryOn(asyncAdd)
+        const asyncAdd5 = CurryOn(asyncAdd).mapOutput((result) => result + 5)
         const result = await asyncAdd5(10)
-        expect(result).toBe(15)
+        expect(result).toBe(20)
+    })
+
+    it('should provide backwards compatibility for mapOutputAsync', async () => {
+        const asyncAdd = async (a: number) => a + 5
+        const asyncAdd5 = CurryOn(asyncAdd).mapOutputAsync(
+            (result) => result + 5
+        )
+        const result = await asyncAdd5(10)
+        expect(result).toBe(20)
     })
 
     it('should have access to input on mapOut methods', () => {
