@@ -81,4 +81,11 @@ describe('CurryOn', () => {
         )
         expect(add5(10)).toBe(25)
     })
+
+    it('should have support old aliasing mapOutputAsync', () => {
+        const add5 = CurryOn(add(5)).mapOutputAsync(
+            (result, [input]) => result + input
+        )
+        expect(add5(10)).toBe(25)
+    })
 })
