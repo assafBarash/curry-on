@@ -27,7 +27,7 @@ export const CurryOn = <OgParams extends any[], OgResult>(
         CurryOn<OgParams, Promisify<OgResult, NewResult>>((...params) => {
             const result = rootFunc(...params)
             return (
-                result instanceof Promise
+                (result as Promise<OgResult>)?.then
                     ? (result as Promise<OgResult>).then((res) =>
                           mapOutputCb(res as Awaited<OgResult>, params)
                       )

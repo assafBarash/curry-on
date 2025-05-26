@@ -58,7 +58,10 @@ describe('CurryOn', () => {
 
     it('should support async functions', async () => {
         const asyncAdd = async (a: number) => a + 5
-        const asyncAdd5 = CurryOn(asyncAdd).mapOutput((result) => result + 5)
+        const asyncAdd5 = CurryOn(asyncAdd)
+            .mapOutput((result) => Promise.resolve(result + 7))
+            .mapOutput(async (result) => result - 2)
+
         const result = await asyncAdd5(10)
         expect(result).toBe(20)
     })
