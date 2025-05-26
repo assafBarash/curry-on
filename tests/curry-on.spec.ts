@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals'
-import { CurryOn } from '../src'
+import { CurryOn } from '../src/service/instance'
 
 describe('CurryOn', () => {
     const add = (a: number) => (b: number) => a + b
