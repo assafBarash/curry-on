@@ -48,7 +48,7 @@ export const CurryOn = <OgParams extends any[], OgResult>(
         })
 
     // backwards compatibility
-    instance.mapOutputAsync = instance.mapInput as any
+    instance.mapOutputAsync = instance.mapOutput
 
     instance.clearCurryOn = () => rootFunc
 
