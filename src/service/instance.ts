@@ -1,4 +1,4 @@
-import { BaseParams } from '@/types'
+import { BaseParams } from '../types'
 import { createMapInput, createMapOutput } from './methods'
 
 type BaseFunc<Params extends BaseParams, Result> = (...params: Params) => Result
