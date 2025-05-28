@@ -1,1 +1,1 @@
-export * from './service'
+export * from './curry-on/instance'

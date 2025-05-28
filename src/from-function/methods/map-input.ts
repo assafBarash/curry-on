@@ -1,12 +1,18 @@
 import { BaseFunc, BaseParams } from '@/types'
-import { CurryOn } from '../instance'
+import { fromFunction, CurryOnFunction } from '../instance'
+
+export type IMapInput<OgParams extends BaseParams[], OgResult> = <
+    NewParams extends BaseParams
+>(
+    cb: (...params: NewParams) => OgParams
+) => CurryOnFunction<NewParams, OgResult>
 
 export const createMapInput =
     <OgParams extends BaseParams, OgResult>(
         rootFunc: BaseFunc<OgParams, OgResult>
-    ) =>
-    <NewParams extends BaseParams>(mapInputCb: BaseFunc<NewParams, OgParams>) =>
-        CurryOn<NewParams, OgResult>((...params) => {
+    ): IMapInput<OgParams, OgResult> =>
+    (mapInputCb) =>
+        fromFunction((...params) => {
             const newParams = mapInputCb(...params)
             return rootFunc(
                 ...((Array.isArray(newParams)

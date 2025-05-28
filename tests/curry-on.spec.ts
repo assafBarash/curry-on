@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals'
-import { CurryOn } from '../src/service/instance'
+import { CurryOn } from '../src'
 
 describe('CurryOn', () => {
     const add = (a: number) => (b: number) => a + b
@@ -43,7 +43,7 @@ describe('CurryOn', () => {
 
     it('should chain mapInput and mapOutput', () => {
         const add5add1multiple2 = CurryOn(add(5))
-            .mapInput((a: number) => [a + 1])
+            .mapInput((a) => [a + 1])
             .mapOutput((result) => result * 2)
         expect(add5add1multiple2(10)).toBe(32)
     })
@@ -87,5 +87,21 @@ describe('CurryOn', () => {
             (result, [input]) => result + input
         )
         expect(add5(10)).toBe(25)
+    })
+
+    it('should support from function syntax', () => {
+        const add5 = CurryOn.fromFunction(add(5)).mapOutputAsync(
+            (result, [input]) => result + input
+        )
+        expect(add5(10)).toBe(25)
+    })
+
+    it('should call before & after hooks', () => {
+        const add5 = CurryOn(add(5))
+            .before((input) => {
+                expect(input).toEqual(10)
+            })
+            .after((out) => expect(out).toBe(15))
+        expect(add5(10)).toBe(15)
     })
 })
