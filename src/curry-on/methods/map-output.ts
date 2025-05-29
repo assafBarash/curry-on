@@ -1,9 +1,9 @@
 import { BaseFunc, BaseParams, Promisify } from '@/types'
-import { CurryOnFunction, fromFunction } from '../instance'
+import { CurryOnInstance, CurryOn } from '../instance'
 
 export type IMapOutput<OgParams extends BaseParams, OgResult> = <NewResult>(
     cb: (result: Awaited<OgResult>, input: OgParams) => NewResult
-) => CurryOnFunction<OgParams, Promisify<OgResult, NewResult>>
+) => CurryOnInstance<OgParams, Promisify<OgResult, NewResult>>
 
 export const createMapOutput =
     <OgParams extends BaseParams, OgResult>(
@@ -12,7 +12,7 @@ export const createMapOutput =
     <NewResult>(
         mapOutputCb: BaseFunc<[Awaited<OgResult>, OgParams], NewResult>
     ) =>
-        fromFunction<OgParams, Promisify<OgResult, NewResult>>((...params) => {
+        CurryOn<OgParams, Promisify<OgResult, NewResult>>((...params) => {
             const result = rootFunc(...params)
             return (
                 result instanceof Promise

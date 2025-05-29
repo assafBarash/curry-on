@@ -1,16 +1,16 @@
 import { BaseFunc, BaseParams } from '@/types'
-import { CurryOnFunction, fromFunction } from '../instance'
+import { CurryOnInstance, CurryOn } from '../instance'
 
 export type IAfter<OgParams extends BaseParams, OgResult> = (
     cb: (result: Awaited<OgResult>, input: OgParams) => unknown
-) => CurryOnFunction<OgParams, OgResult>
+) => CurryOnInstance<OgParams, OgResult>
 
 export const createAfter =
     <OgParams extends BaseParams, OgResult>(
         rootFunc: BaseFunc<OgParams, OgResult>
     ): IAfter<OgParams, OgResult> =>
     (afterCb) =>
-        fromFunction((...params) => {
+        CurryOn((...params) => {
             const result = rootFunc(...params)
 
             result instanceof Promise

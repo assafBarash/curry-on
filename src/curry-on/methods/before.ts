@@ -1,16 +1,16 @@
 import { BaseFunc, BaseParams } from '@/types'
-import { fromFunction, CurryOnFunction } from '../instance'
+import { CurryOn, CurryOnInstance } from '../instance'
 
 export type IBefore<OgParams extends BaseParams, OgResult> = (
     cb: (...params: OgParams) => unknown
-) => CurryOnFunction<OgParams, OgResult>
+) => CurryOnInstance<OgParams, OgResult>
 
 export const createBefore =
     <OgParams extends BaseParams, OgResult>(
         rootFunc: BaseFunc<OgParams, OgResult>
     ): IBefore<OgParams, OgResult> =>
     (beforeCb) =>
-        fromFunction((...params) => {
+        CurryOn((...params) => {
             beforeCb(...params)
             return rootFunc(...params)
         })
