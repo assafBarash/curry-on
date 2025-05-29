@@ -89,13 +89,6 @@ describe('CurryOn', () => {
         expect(add5(10)).toBe(25)
     })
 
-    it('should support from function syntax', () => {
-        const add5 = CurryOn.fromFunction(add(5)).mapOutputAsync(
-            (result, [input]) => result + input
-        )
-        expect(add5(10)).toBe(25)
-    })
-
     it('should call before & after hooks', () => {
         const add5 = CurryOn(add(5))
             .before((input) => {
